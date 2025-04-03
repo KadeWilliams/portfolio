@@ -1,0 +1,15 @@
+package templates 
+
+templ ContactForm() {
+    <form hx-post="/contact" hx-swap="outerHTML">
+        <div>
+            <label for="name">NAME:</label>
+            <input id="name" type="text" name="name" required/>
+        </div>
+        <div>
+            <label for="message">NAME:</label>
+            <textarea id="message" type="text" name="message" required rows="5"></textarea>
+        </div>
+        <button type="submit">SEND RAW</button>
+    </form>
+}

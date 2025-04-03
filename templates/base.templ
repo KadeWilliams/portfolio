@@ -1,0 +1,39 @@
+package templates
+
+import (
+    "time"
+    "strconv"
+)
+
+templ Base(title string, content templ.Component) {
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>{ title }</title>
+        <script src="https://unpkg.com/htmx.org@2.0.4" integrity="sha384-HGfztofotfshcF7+8n44JQL2oJmowVChPTg48S+jvZoztPfvwD79OC/LTtG6dMp+" crossorigin="anonymous"></script>
+        <link href="/static/styles.css" rel="stylesheet"/>
+        <script>
+            document.documentElement.style.setProperty(
+                '--accent',
+                [
+                    '#ff4136', '#ff851b', '#ffdc00', '#2ecc40','#0074d9', '#b10dc9'
+                ][new Date().getDay() % 6]);
+        </script>
+        <link href="/static/brutal.css" rel="stylesheet">
+    </head>
+    <body>
+        @Nav()
+        @SystemInfo()
+        <main>
+            @content
+        </main>
+        <footer class="mono">
+            <span>&copy; { strconv.Itoa(time.Now().Year()) }</span>
+            <span>|</span>
+            <span hx-get="/server-status" hx-trigger="load, every 1s">Loading...</span>
+        </footer>
+    </body>
+    </html>
+}

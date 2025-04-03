@@ -1,0 +1,79 @@
+:root {
+    --bg: #fcf5e5;
+    --text: #221813;
+    --border: 2px;
+    --accent: #ff4136  /* dynamically set */
+}
+
+nav {
+    background: var(--text);
+    color: var(--bg);
+    padding: 1rem;
+}
+
+body {
+    font-family: 'Courier New', monospace;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.4;
+    margin: 0;
+    padding: 1rem;
+}
+
+.frame {
+    border: var(--border) solid var(--text);
+    min-height: 95vh;
+    display: flex;
+    flex-direction: column;
+}
+
+a {
+    color: var(--text);
+    text-decoration: none;
+    border-bottom: var(--border) solid var(--accent);
+}
+
+a:hover {
+    background: var(--accent);
+    color: var(--bg);
+}
+
+button, input, textarea {
+    font-family: inherit;
+    background: var(--bg);
+    border: var(--border) solid var(--text);
+    padding: 0.5rem 1rem;
+    margin: 0.25rem;
+}
+
+button:hover {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: var(--bg);
+}
+
+.mono {
+    font-family: monospace;
+    font-size: .9rem;
+}
+
+/* Nav */
+nav ul {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border-bottom: var(--border) solid var(--text);
+}
+
+/* Content */
+.content-block {
+    border: var(--border) solid var(--text);
+    margin: 1rem;
+    padding: 1rem;
+}
+
+.content-block h2 {
+    margin-top: 0;
+    border-bottom: var(--bottom) solid var(--text);
+}

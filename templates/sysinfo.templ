@@ -1,0 +1,12 @@
+package templates
+
+import (
+    "time"
+)
+
+templ SystemInfo() {
+    <div class="mono">
+        <p>SERVER TIME: { time.Now().Format(time.RFC1123) }</p>
+        //<p>CONNECTION: { c.Request().RemoteAddr }</p>
+    </div>
+}
