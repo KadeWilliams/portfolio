@@ -2,6 +2,7 @@ package main
 
 import (
 	"embed"
+	"fmt"
 	"io/fs"
 	"log"
 	"net/http"
@@ -60,6 +61,16 @@ func main() {
 	})
 	e.GET("/status", func(c echo.Context) error {
 		return c.String(http.StatusOK, time.Now().Format("2006-01-02 15:04:05"))
+	})
+
+	i := 0 
+	e.POST("/weather", func(c echo.Context) error {
+		lat := c.FormValue("latitude")
+		long := c.FormValue("longitude")
+		fmt.Printf("\nlat: %s\nlong: %s\n", lat, long)
+		i++
+		time.Sleep(1 * time.Second)
+		return c.String(http.StatusOK, fmt.Sprintf("%d", i))
 	})
 
 	port := os.Getenv("PORT")

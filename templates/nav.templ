@@ -1,7 +1,7 @@
 package templates
 
 templ Nav() {
-    <nav>
+    <nav style="display: flex; justify-content: space-around">
         <ul>
             <li><a href="/" hx-boost="true">HOME</a></li>
             <li><a href="/about" hx-boost="true">ABOUT</a></li>
@@ -10,5 +10,8 @@ templ Nav() {
                 <a href="/contact" hx-boost="true">CONTACT</a>
             </li>
         </ul>
+		<div id="weather" hx-post="/weather" hx-trigger="load, every 5s" hx-vals="js:{'latitude': latitude, 'longitude': longitude}">
+		/*<div id="weather" hx-get="/weather" hx-trigger="load, every 43200000ms">*/
+        </div>
     </nav>
 }

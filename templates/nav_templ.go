@@ -29,7 +29,7 @@ func Nav() templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<nav><ul><li><a href=\"/\" hx-boost=\"true\">HOME</a></li><li><a href=\"/about\" hx-boost=\"true\">ABOUT</a></li><li><a href=\"/projects\" hx-boost=\"true\">PROJECTS</a></li><li style=\"border-right: none;\"><a href=\"/contact\" hx-boost=\"true\">CONTACT</a></li></ul></nav>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<nav style=\"display: flex; justify-content: space-around\"><ul><li><a href=\"/\" hx-boost=\"true\">HOME</a></li><li><a href=\"/about\" hx-boost=\"true\">ABOUT</a></li><li><a href=\"/projects\" hx-boost=\"true\">PROJECTS</a></li><li style=\"border-right: none;\"><a href=\"/contact\" hx-boost=\"true\">CONTACT</a></li></ul><div id=\"weather\" hx-post=\"/weather\" hx-trigger=\"load, every 5s\" hx-vals=\"js:{&#39;latitude&#39;: latitude, &#39;longitude&#39;: longitude}\"></div></nav>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
