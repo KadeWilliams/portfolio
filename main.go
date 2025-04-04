@@ -3,6 +3,7 @@ package main
 import (
 	"embed"
 	"fmt"
+	"io"
 	"io/fs"
 	"log"
 	"net/http"
@@ -18,13 +19,17 @@ import (
 
 var templatesFS embed.FS
 
+type RequestData struct {
+	Latitude  string `json:"latitude"`
+	Longitude string `json:"longitude"`
+}
 //go:embed static/*
 var staticFS embed.FS
 
 func main() {
 	e := echo.New()
 
-	e.Use(middleware.Logger())
+	// e.Use(middleware.Logger())
 	e.Use(middleware.Recover())
 
 	staticFiles, err := fs.Sub(staticFS, "static")
@@ -67,7 +72,16 @@ func main() {
 	e.POST("/weather", func(c echo.Context) error {
 		lat := c.FormValue("latitude")
 		long := c.FormValue("longitude")
-		fmt.Printf("\nlat: %s\nlong: %s\n", lat, long)
+		resp, err := http.Get(fmt.Sprintf("https://api.open-meteo.com/v1/forecast?latitude=%s&longitude=%s&hourly=temperature_2m&current=relative_humidity_2m,temperature_2m&temperature_unit=fahrenheit", lat, long))
+		if err != nil {
+			return c.String(http.StatusBadRequest, err.Error())
+		}
+		defer resp.Body.Close()
+		body, err := io.ReadAll(resp.Body)
+		if err != nil {
+			return c.String(http.StatusBadRequest, err.Error())
+		}
+		fmt.Println(string(body))
 		i++
 		time.Sleep(1 * time.Second)
 		return c.String(http.StatusOK, fmt.Sprintf("%d", i))

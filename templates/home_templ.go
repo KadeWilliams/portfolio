@@ -62,14 +62,14 @@ func homeContent() templ.Component {
 			templ_7745c5c3_Var2 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<div class=\"content-block\"><h2>SYSTEM STATUS</h2><div hx-get=\"/status\" hx-trigger=\"load, every 3s\"><p>Loading system diagnostics...</p></div></div><div class=\"content-block\"><h2>RECENT ACTIVITY</h2><div hx-get=\"/status\" hx-trigger=\"load, every 1s\"><li>User connected: <span class=\"mono\">192.168.1.1</span></li><li>Last update: <span class=\"mono\">")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<div class=\"content-block\"><h2>SYSTEM STATUS</h2><div hx-get=\"/status\" hx-trigger=\"load\"><p>Loading system diagnostics...</p></div></div><div class=\"content-block\"><h2>RECENT ACTIVITY</h2><div hx-get=\"/status\" hx-trigger=\"load\"><li>User connected: <span class=\"mono\">192.168.1.1</span></li><li>Last update: <span class=\"mono\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var3 string
 		templ_7745c5c3_Var3, templ_7745c5c3_Err = templ.JoinStringErrs(time.Now().Format("2006-01-02 15:04:05"))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/home.templ`, Line: 22, Col: 81}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/home.templ`, Line: 24, Col: 81}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var3))
 		if templ_7745c5c3_Err != nil {

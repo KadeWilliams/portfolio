@@ -19,22 +19,16 @@ templ Base(title string, content templ.Component) {
                 '--accent',
                 [
                     '#ff4136', '#ff851b', '#ffdc00', '#2ecc40','#0074d9', '#b10dc9'
-                ][new Date().getDay() % 6]);
-        if ("geolocation" in navigator) {
-        navigator.geolocation.getCurrentPosition(
-            (position) => {
-                const latitude = position.coords.latitude;
-                const longitude = position.coords.longitude;
-            },
-            (error) => {
-                // Error: Handle geolocation errors
-                console.error("Error getting geolocation:", error);
-            }
-        );
-    } else {
-        // Geolocation not supported
-        console.log("Geolocation is not supported by this browser.");
-    }
+                ][new Date().getDay() % 6]
+            );
+            /*Use a Custom Trigger After Page Load*/
+            document.addEventListener('DOMContentLoaded', function() {
+                navigator.geolocation.getCurrentPosition(function(position) {
+                    window.latitude = position.coords.latitude;
+                    window.longitude = position.coords.longitude;
+                    htmx.trigger(htmx.find('[hx-trigger="geoload"]'), 'geoload');
+                });
+            });
         </script>
         <link href="/static/brutal.css" rel="stylesheet">
     </head>

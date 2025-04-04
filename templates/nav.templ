@@ -10,8 +10,7 @@ templ Nav() {
                 <a href="/contact" hx-boost="true">CONTACT</a>
             </li>
         </ul>
-		<div id="weather" hx-post="/weather" hx-trigger="load, every 5s" hx-vals="js:{'latitude': latitude, 'longitude': longitude}">
-		/*<div id="weather" hx-get="/weather" hx-trigger="load, every 43200000ms">*/
+		<div id="weather" hx-post="/weather" hx-trigger="geoload" hx-swap="none" hx-vals="js:{latitude: window.latitude, longitude: window.longitude }">
         </div>
     </nav>
 }

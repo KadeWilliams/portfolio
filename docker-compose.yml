@@ -1,7 +1,4 @@
-yaml
-
-version: '3.8'
-
+yaml version: '3.8'
 services:
   web:
     build: .
