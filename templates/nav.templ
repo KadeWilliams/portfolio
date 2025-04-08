@@ -10,7 +10,13 @@ templ Nav() {
                 <a href="/contact" hx-boost="true">CONTACT</a>
             </li>
         </ul>
-		<div id="weather" hx-post="/weather" hx-trigger="geoload" hx-swap="none" hx-vals="js:{latitude: window.latitude, longitude: window.longitude }">
+		<div id="weather" hx-get="/weather" hx-trigger="geoload" hx-swap="innerHTML" hx-vals="js:{latitude: window.latitude, longitude: window.longitude }">
         </div>
+        /*
+        <label class="switch">
+            <input type="checkbox">
+            <span class="slider round" id="theme-toggler" data-theme="light"></span>
+        </label>
+        */
     </nav>
 }

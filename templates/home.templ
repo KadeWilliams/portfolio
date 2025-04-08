@@ -1,9 +1,5 @@
 package templates
 
-import (
-	"time"
-)
-
 templ Home() {
 	@Base("Home", homeContent())
 }
@@ -11,20 +7,25 @@ templ Home() {
 templ homeContent() {
 	<div class="content-block">
 		<h2>SYSTEM STATUS</h2>
-		<div hx-get="/status" hx-trigger="load">
+	<div hx-get="/status" hx-trigger="load, every 300s" hx-swap="innerHTML">
 		// <div hx-get="/status" hx-trigger="load, every 3s">
 			<p>Loading system diagnostics...</p>
 		</div>
 	</div>
 	<div class="content-block">
 		<h2>RECENT ACTIVITY</h2>
-		<div hx-get="/status" hx-trigger="load">
+		// <div hx-get="/status" hx-trigger="load, every 1s" hx-swap="innerHTML">
 		// <div hx-get="/status" hx-trigger="load, every 1s">
-			<li>User connected: <span class="mono">192.168.1.1</span></li>
-			<li>Last update: <span class="mono">{ time.Now().Format("2006-01-02 15:04:05")}</span></li>
-			<button hx-post="/refresh" hx-target="closest .content-block">
-				FORCE REFRESH
-			</button>
-		</div>
+			// <li>User connected: <span class="mono">192.168.1.1</span></li>
+			// <li>User connected: <span class="mono"></span></li>
+			// <li>Last update: <span class="mono">{ time.Now().Format("2006-01-02 15:04:05")}</span></li>
+			// <button hx-post="/refresh" hx-target="closest .content-block">
+			// 	FORCE REFRESH
+			// </button>
+		// </div>
 	</div>
+}
+
+templ testContent() {
+	<div>TESTTESTTEST</div>
 }

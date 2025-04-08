@@ -1,6 +1,6 @@
 :root {
-    --bg: #fcf5e5;
-    --text: #221813;
+    --bg: #fcf5e5; /* default, but changes dynamically on toggle */
+    --text: #221813; /* default, but changes dynamically on toggle */
     --border: 2px;
     --accent: #ff4136  /* dynamically set */
 }
@@ -9,6 +9,9 @@ nav {
     background: var(--text);
     color: var(--bg);
     padding: 1rem;
+    position: sticky;
+    top:0;
+    margin:0;
 }
 
 body {
@@ -17,6 +20,9 @@ body {
     color: var(--text);
     line-height: 1.4;
     margin: 0;
+}
+
+main, footer {
     padding: 1rem;
 }
 
