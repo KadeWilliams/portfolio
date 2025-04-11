@@ -1,0 +1,26 @@
+package templates
+
+templ SortingVisualizer() {
+    <div class="demo-card">
+        <h2>Bubble Sort Visualizer</h2>
+        <button hx-post="/sort" hx-target="#sort-output">Start Sorting</button>
+        <div id="sort-output" class="sort-container">
+            <div class="bar" style="height: 30%;"></div>
+            <div class="bar" style="height: 80%;"></div>
+            <div class="bar" style="height: 50%;"></div>
+        </div>
+    </div>
+    <script>
+        // called from WASM to update visualization
+        function updateSortBars(heights) {
+            const container = document.getElementById("sort-output");
+            container.innerHTML = '';
+            heights.forEach(h=> {
+                const bar = document.createElement("div");
+                bar.className = "bar";
+                bar.style.height = `${h}`;
+                container.appendChild(bar);
+            });
+        }
+    </script>
+}

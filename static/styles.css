@@ -67,6 +67,35 @@ a, button {
     }
 }
 
+/* wasm stuff */
+
+/* markdown */
+.markdown-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.editor, .preview {
+  min-height: 200px;
+  border: 1px solid #ccc;
+  padding: 1rem;
+}
+
+/* sorting  */
+.sort-container {
+  display: flex; 
+  gap: 2px;
+  align-items: flex-end;
+  height: 300px;
+  margin-top: 1rem;
+}
+.bar {
+  flex: 1;
+  background: steelblue;
+  transition: height 0.2s;
+}
+
 /*
 https://www.w3schools.com/howto/howto_css_switch.asp
 Toggler 

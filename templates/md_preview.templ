@@ -1,0 +1,22 @@
+package templates
+
+templ MarkdownPreviewer() {
+    <div class="demo-card">
+        <h2>Live Markdown Preview</h2>
+        <div class="markdown-container"
+        hx-trigger="keyup delay:200ms"
+        hx-post="/markdown"
+        hx-target="#markdown-output">
+            <textarea name="markdown" class="editor">
+                # Try me!
+                **Bold** and _italic_
+            </textarea>
+        </div>
+        <div id="markdown-output" class="preview"></div>
+    </div>
+    <script>
+        function renderMarkdown(html) {
+            document.getElementById("markdown-output").innerHTML = html;
+        }
+    </script>
+}

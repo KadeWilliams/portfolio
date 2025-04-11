@@ -1,0 +1,23 @@
+package templates 
+
+templ WASMPage() {
+    <div class="container">
+        <h1>WASM Demos</h1>
+        <div class="demos">
+            @MarkdownPreviewer()
+            @SortingVisualizer()
+        </div>
+    </div>
+
+    <script src="/static/wasm/wasm_exec.js"></script>
+    <script>
+        // Initialize WASM
+        async function initWASM() {
+            const go = new Go();
+            const wasm = await fetch("/wasm");
+            const instance = await WebAssembly.instantiateStreaming(wasm, go.importObject);
+            go.run(instance)
+        }
+        initWASM();
+    </script>
+}
