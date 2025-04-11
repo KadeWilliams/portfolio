@@ -59,7 +59,7 @@ func main() {
 	e.GET("/projects", projectsHandler)
 	e.GET("/project", projectHandler)
 	// e.GET("/status", sysInfoHandler)
-	// e.GET("/wasm", serveWASM)
+	e.GET("/wasm", serveWASM)
 	// e.GET("/wasm_exec.js", serveWASMJS)
 		
 
