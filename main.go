@@ -8,6 +8,7 @@ import (
 	"net/http"
 	"os"
 	"path/filepath"
+	"strings"
 	"time"
 
 	templates "myapp/templates"
@@ -97,7 +98,19 @@ func main() {
 }
 
 func serveWASM(c echo.Context) error {
-	return c.File("static/wasm/main.wasm")
+	wasmFile := c.Param("*")
+	data, err := staticFS.ReadFile("static/wasm/" + wasmFile)
+	if err != nil {
+		return c.String(http.StatusNotFound, "WASM file not found")
+	}
+
+	contentType := "application/wasm"
+	if strings.HasSuffix(wasmFile, ".js") {
+		contentType = "application/javascript"
+	}
+
+	return c.Blob(http.StatusOK, contentType, data)
+	// return c.File("static/wasm/main.wasm")
 }
 
 func serveWASMJS(c echo.Context) error {
