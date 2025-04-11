@@ -8,7 +8,6 @@ import (
 	"net/http"
 	"os"
 	"path/filepath"
-	"strings"
 	"time"
 
 	templates "myapp/templates"
@@ -34,6 +33,12 @@ func main() {
 	}))
 
 	e.Use(middleware.Recover())
+	e.Use(middleware.StaticWithConfig(middleware.StaticConfig{
+		Root: "static",
+		Browse: false,
+		Index: "",
+		HTML5: false,
+	}))
 
 	staticFiles, err := fs.Sub(staticFS, "static")
 	if err != nil {
@@ -60,7 +65,11 @@ func main() {
 	e.GET("/projects", projectsHandler)
 	e.GET("/project", projectHandler)
 	// e.GET("/status", sysInfoHandler)
-	e.GET("/wasm", serveWASM)
+	e.GET("/wasm", func(c echo.Context) error {
+		return templates.WASMPage().Render(c.Request().Context(), c.Response())
+	})
+	e.GET("/static/wasm/main.wasm", serveWASM)
+	e.GET("/static/wasm/wasm_exec.js", serveWASMJS)
 	// e.GET("/wasm_exec.js", serveWASMJS)
 		
 
@@ -97,20 +106,26 @@ func main() {
 	e.Logger.Fatal(e.Start(":"+port))
 }
 
+// func WASMHandler(c echo.Context) error {
+// 	return c.File("static/wasm/main.wasm")
+// }
+
 func serveWASM(c echo.Context) error {
-	wasmFile := c.Param("*")
-	data, err := staticFS.ReadFile("static/wasm/" + wasmFile)
-	if err != nil {
-		return c.String(http.StatusNotFound, "WASM file not found")
-	}
+	// wasmFile := c.Param("*")
+	// data, err := staticFS.ReadFile("static/wasm/" + wasmFile)
+	// if err != nil {
+	// 	return c.String(http.StatusNotFound, "WASM file not found")
+	// }
 
-	contentType := "application/wasm"
-	if strings.HasSuffix(wasmFile, ".js") {
-		contentType = "application/javascript"
-	}
+	// contentType := "application/wasm"
+	// if strings.HasSuffix(wasmFile, ".js") {
+	// 	contentType = "application/javascript"
+	// }
 
-	return c.Blob(http.StatusOK, contentType, data)
-	// return c.File("static/wasm/main.wasm")
+	// return c.Blob(http.StatusOK, contentType, data)
+	c.Response().Header().Set("content-type", "application/wasm")
+	return c.File("static/wasm/main.wasm")
+	// return Render(c, http.StatusOK, templates.WASMPage())
 }
 
 func serveWASMJS(c echo.Context) error {
